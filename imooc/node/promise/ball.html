@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>promise</title>
+	<style type="text/css">
+		.ball{
+			width: 20px;
+			height: 20px;
+			border-radius: 50%;
+		}
+		.ball1{
+			background: red;
+		}
+		.ball2{
+			background: yellow;
+		}
+		.ball3{
+			background: blue;
+		}
+	</style>
+</head>
+<body>
+	<div class="ball ball1" style="margin-left: 0px;"></div>
+	<div class="ball ball2" style="margin-left: 0px;"></div>
+	<div class="ball ball3" style="margin-left: 0px;"></div>
+
+	<script type="text/javascript">
+		var ball1 = document.querySelector('.ball1');
+		var ball2 = document.querySelector('.ball2');
+		var ball3 = document.querySelector('.ball3');
+
+		// 使用promise
+		var Promise = window.Promise;
+
+		function promiseAnimation(ball, distance){
+			return new Promise((resolve, reject)=>{
+				function _animation(){
+					setTimeout(function(){
+						var marginLeftVal = parseInt(ball.style.marginLeft, 10);
+
+						if(marginLeftVal === distance){
+							resolve();
+						}else{
+							if(marginLeftVal < distance){
+								marginLeftVal++;
+							}else{
+								marginLeftVal--;
+							}
+							ball.style.marginLeft = marginLeftVal + 'px';
+							_animation(ball, distance);
+						}
+					},13);
+				}
+				_animation();
+			})
+		}
+
+		promiseAnimation(ball1, 100)
+			.then(function(){
+				return promiseAnimation(ball2, 200);
+			})
+			.then(function(){
+				return promiseAnimation(ball3, 300);
+			})
+			.then(function(){
+				return promiseAnimation(ball3, 150);
+			})
+			.then(function(){
+				return promiseAnimation(ball2, 150);
+			})
+			.then(function(){
+				return promiseAnimation(ball1, 150);
+			})
+
+
+		// 不用promise的原始方法：
+		function animation(ball, distance, cb){
+			setTimeout(function(){
+				var marginLeftVal = parseInt(ball.style.marginLeft, 10);
+
+				if(marginLeftVal === distance){
+					cb && cb();
+				}else{
+					if(marginLeftVal < distance){
+						marginLeftVal++;
+					}else{
+						marginLeftVal--;
+					}
+					ball.style.marginLeft = marginLeftVal + 'px';
+					animation(ball, distance, cb);
+				}
+			},13);
+		}
+
+		// animation(ball1,300,function(){
+		// 	animation(ball2,400,function(){
+		// 		animation(ball3,500,function(){
+		// 			animation(ball3,350,function(){
+		// 				animation(ball2,350,function(){
+		// 					animation(ball1,350,function(){
+
+		// 					})
+		// 				})
+		// 			})
+		// 		})
+		// 	})
+		// })
+
+
+	</script>
+</body>
+</html>
