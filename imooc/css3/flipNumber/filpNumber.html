@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>flipNumber</title>
+	<style type="text/css">
+		.wrapVision{
+			perspective: 800px;
+			perspective-origin: 50% 50%;
+			overflow: hidden;
+		}
+		.dStyle{
+			transform-style: preserve-3d;
+			width:200px;
+			height: 200px;
+			position: relative;
+			margin: 0 auto;
+		}
+		.page{
+			width: 160px;
+			height: 160px;
+			background: black;
+			color: #fff;
+			font-size: 30px;
+			line-height: 160px;
+			text-align: center;
+			padding: 20px;
+			position: absolute;
+		}
+		#page1{
+			transition: transform 1s ease-in-out;
+			transform-origin: bottom;
+		}
+		#page2,#page3,#page4,#page5,#page6{
+			transform: rotateX(90deg);
+			transition: transform 1s ease-in-out;
+			transform-origin: bottom;
+		}
+		.op{
+			text-align: center;
+		}
+		.cub1{
+			background: rgba(39,255,255,0.4);
+			transform:translateZ(80px);
+		}
+		.cub2{
+			background: purple;
+			opacity: 0.5;
+			transform: rotateY(90deg) translateZ(80px);
+		}
+		.cub3{
+			background: green;
+			opacity: 0.5;
+			transform: rotateY(180deg) translateZ(80px);
+		}
+		.cub4{
+			background: blue;
+			opacity: 0.5;
+			transform: rotateY(-90deg) translateZ(80px);
+		}
+		.cub5{
+			background: yellow;
+			opacity: 0.5;
+			transform: rotateX(90deg) translateZ(80px);
+		}
+		.cub6{
+			background: red;
+			opacity: 0.5;
+			transform: rotateX(-90deg) translateZ(80px);
+		}
+		.cubeStyle:hover{
+			transform:rotateX(-45deg) rotateY(225deg);
+			transition:transform .6s;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="wrapVision">
+		<div class="dStyle">
+			<div class="page" id="page1">1</div>
+			<div class="page" id="page2">2</div>
+			<div class="page" id="page3">3</div>
+			<div class="page" id="page4">4</div>
+			<div class="page" id="page5">5</div>
+			<div class="page" id="page6">6</div>
+		</div>
+	</div>
+
+	<div class="op">
+		<a href="javascript:prev()">prev</a>
+		<a href="javascript:next()">next</a>
+	</div>
+	<!-- 正方体 -->
+	<div class="wrapVision">
+		<div class="dStyle cubeStyle">
+			<div class="page cub1">1</div>
+			<div class="page cub2">2</div>
+			<div class="page cub3">3</div>
+			<div class="page cub4">4</div>
+			<div class="page cub5">5</div>
+			<div class="page cub6">6</div>
+		</div>	
+	</div>
+</body>
+<script type="text/javascript">
+	var curIndex = 1;
+	function prev() {
+		if(curIndex == 1){
+			return;
+		}
+		var curPage = document.getElementById('page'+curIndex);
+		curPage.style.transform = 'rotateX(90deg)';
+
+		curIndex--;
+		var prevPage = document.getElementById('page'+curIndex);
+		prevPage.style.transform = 'rotateX(0deg)';
+	}
+
+	function next() {
+		if(curIndex == 6){
+			return;
+		}
+		var curPage = document.getElementById('page'+curIndex);
+		curPage.style.transform = 'rotateX(-90deg)';
+
+		curIndex++;
+		var nextPage = document.getElementById('page'+curIndex);
+		nextPage.style.transform = 'rotateX(0deg)';
+	}
+</script>
+</html>
