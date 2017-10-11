@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>带数字的loading</title>
+	<style type="text/css">
+		.loading{
+			position: fixed;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			background: #fff;
+			z-index: 100;
+		}
+		.loading .pic{
+			position: absolute;
+			left: 0;
+			right: 0;
+			top: 0;
+			bottom: 0;
+			margin: auto;
+			width: 50px;
+			height: 50px;
+			/*border:1px solid red;*/
+			
+		}
+		.loading .pic span{
+			display: block;
+			width: 40px;
+			height: 40px;
+			margin: 5px;
+			border-radius: 50%;
+			box-shadow: 0 2px 0 #aaa;
+			animation: numberRotate 1s infinite linear;
+		}
+		.loading .pic b{
+			display: block;
+			text-align: center;
+			line-height: 50px;
+			font-size: 14px;
+			position: absolute;
+			left: 15px;
+			top: 0px;
+		}
+		@keyframes numberRotate {
+			0% {transform: rotate(0deg);}
+			100% {transform: rotate(360deg);}
+		}
+		@-webkit-keyframes numberRotate {
+			0% {-webkit-transform: rotate(0deg);}
+			100% {-webkit-transform: rotate(360deg);}
+		 }
+	</style>
+</head>
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		var imgs = $('img');
+		var num = 0;
+
+		imgs.each(function(i){
+			var oImgs = new Image();
+
+			oImgs.onload = function(){
+				oImgs.onload = null;
+				num++;
+
+				$('.loading b').html(parseInt(num/imgs.length*100)+'%');
+				if(num >= i){
+					$('.loading').fadeOut();
+				}
+			}
+
+			oImgs.src = imgs[i].src;
+		})
+	})
+</script>
+<body>
+
+	<div class="loading">
+		<div class="pic">
+			<span></span>
+			<b>0%</b>
+		</div>
+	</div>
+
+	<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1507714054915&di=4c4089bc2daa5274eec88a914409233f&imgtype=0&src=http%3A%2F%2Ff.hiphotos.baidu.com%2Fbaike%2Fpic%2Fitem%2Ff31fbe096b63f624861f5c158d44ebf81a4ca362.jpg">
+
+	<img src="https://ssl-vg03.met.vgwort.de/na/4087b8e580cb4ce59ac4555bc366ca5d">
+
+	<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1507714055329&di=4bf8ac701c912cb5024128184360c025&imgtype=0&src=http%3A%2F%2Fp8.qhimg.com%2Ft01be331bb2f4cec767.jpg">
+
+	<img src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3311224369,1367447781&fm=27&gp=0.jpg">
+
+	<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1507704210&di=ed9be94aef9c239f5b1945be7885ea5e&src=http://img4q.duitang.com/uploads/item/201406/15/20140615113550_XAAQL.jpeg">
+
+	<img src="https://media.netprofit.de/img/logos/netprofit-referenzen.jpg">
+
+	<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1508309020&di=fcd82389e1242941cba9e16bfe762022&imgtype=jpg&er=1&src=http%3A%2F%2Fs8.sinaimg.cn%2Fmw690%2F001r8q8Aty6NZMcifif97%26amp%3B690">
+
+	<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1507720672094&di=7c1bdfb33efd5934563667838b3e72c9&imgtype=0&src=http%3A%2F%2Fe.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2Fa9d3fd1f4134970ac4149dee9ccad1c8a6865d88.jpg">
+
+	<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1507710604&di=24bea13113b705c033091c576145b568&src=http://i3.bbs.fd.zol-img.com.cn/t_s800x5000/g2/M00/09/0E/Cg-4WVVMdLeIWuXVAA66pkmt470AADLaABXAFcADrq-703.jpg">
+
+	<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1507720696265&di=7ad1ec0cb8549217ecfd59dd13d5e84e&imgtype=0&src=http%3A%2F%2Fs4.sinaimg.cn%2Fmiddle%2F66a2bf18xa181b3900113%26690">
+
+	<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1507720704160&di=5f7291e29e87660bd2369db4a6cac0dd&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F10%2F73%2F59%2F48bOOOPICe2.jpg">
+
+	<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1507720714245&di=44162874be38b27c2e76bda90599846e&imgtype=0&src=http%3A%2F%2Fs15.sinaimg.cn%2Fmw690%2F4b96a5actdc4436471cce%26690">
+
+	<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1507720725463&di=21eb60d181595943a3a6325c4c994cee&imgtype=0&src=http%3A%2F%2Fs3.sinaimg.cn%2Fmw690%2F003CgyILty6SBlnlRvQf2%26690">
+</body>
+</html>
