@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<img id="imgID" src="timg.jpg" alt="" style="width:100px">
+	<canvas id="canvas" height="500" width="500"></canvas>
+</body>
+<script type="text/javascript">
+	// window.onload = function(){
+		var canvas = document.querySelector('#canvas');
+		var ctx = canvas.getContext('2d');
+
+		// 画一条直线
+		// ctx.moveTo(100,100)
+		// ctx.lineTo(300,200)
+		// ctx.lineTo(200,100)
+		// ctx.stroke();
+
+		// 画一个圆
+		// ctx.beginPath();
+		// ctx.arc(200,200,100,0*Math.PI,2*Math.PI, true)
+		// ctx.closePath();
+		// ctx.stroke();
+
+		// 填充圆的颜色
+		// ctx.fillStyle="red"
+		// ctx.beginPath();
+		// ctx.arc(200,200,100,0*Math.PI,2*Math.PI, true)
+		// ctx.closePath();
+		// ctx.fill();
+		// ctx.stroke();
+
+		// 渐变
+		// var grd = ctx.createLinearGradient(0,0,500,500);
+		// grd.addColorStop(0,'red')
+		// grd.addColorStop(0.5,'yellow')
+		// grd.addColorStop(1,'pink')
+		// ctx.fillStyle = grd;
+		// ctx.fillRect(0,0,500,500)
+
+		// 一个空心字
+		// ctx.font = '30px Arial'
+		// ctx.fillText('Amber',10,50)
+		// ctx.strokeText('Hello',10,120)
+
+		// 把图片放到canvas中
+		var img = document.getElementById('imgID');
+		img.style.width="100"
+		img.onload = function(){
+			ctx.drawImage(img,10,10)
+		}
+
+	//}
+</script>
+</html>
