@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script src="https://cdn.bootcss.com/lodash.js/4.17.10/lodash.js"></script>
+	<script>
+		console.log(_.countBy([6.1, 4.2, 6.3], Math.floor)); // => { '4': 1, '6': 2 }
+
+		console.log(_.countBy(['one', 'two', 'three'], 'length'))// => { '3': 2, '5': 1 }
+		
+
+		_.every([true, 1, null, 'yes'], Boolean);
+		// => false
+		 
+		var users = [
+		  { 'user': 'barney', 'age': 36, 'active': false },
+		  { 'user': 'fred',   'age': 40, 'active': false }
+		];
+		 
+		// The `_.matches` iteratee shorthand.
+		_.every(users, { 'user': 'barney', 'active': false });
+		// => false
+		 
+		// The `_.matchesProperty` iteratee shorthand.
+		_.every(users, ['active', false]);
+		// => true
+		 
+		// The `_.property` iteratee shorthand.
+		_.every(users, 'active');
+		// => false
+
+	</script>
+</body>
+</html>

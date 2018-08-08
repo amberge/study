@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>chunk</title>
+</head>
+<body>
+	<script src="https://cdn.bootcss.com/lodash.js/4.17.10/lodash.js"></script>
+	<script>
+		let chunk = _.chunk(['a', 'b', 'c', 'd','e'], 2);
+		console.log(chunk) // => [['a', 'b'], ['c', 'd'], ['e']]
+
+		let compact = _.compact([0, 1, false, 2, '', 3]);
+		console.log(compact) // => [1, 2, 3]
+
+		var array = [1];
+		var other = _.concat(array, 2, [3], [[4]]);
+		console.log(other);// => [1, 2, 3, [4]]
+		console.log(array);// => [1]
+
+		let difference = _.difference([2, 1], [2,3]);
+		console.log(difference)// => [1]
+
+		let differenceBy1 = _.differenceBy([2.1, 1.2], [2.3, 3.4], Math.floor);
+		console.log(differenceBy1) // => [1.2]
+		let differenceBy2 = _.differenceBy([2.1, 1.2], [2.3, 3.4], Math.ceil);
+		console.log(differenceBy2) // => [2.1, 1.2]
+
+		let differenceBy3 = _.differenceBy([{ 'x': 2 }, { 'x': 1 }], [{ 'x': 1 },{'x':8}], 'x');
+		console.log(differenceBy3) // => [{'x':2}]
+
+
+		var objects = [{ 'x': 1, 'y': 2 }, { 'x': 2, 'y': 1 }];
+ 
+		let differenceWith = _.differenceWith(objects, [{ 'x': 1, 'y': 2 }], _.isEqual);
+		console.log(differenceWith) // => [{ 'x': 2, 'y': 1 }]
+
+
+		_.drop([1, 2, 3]);
+		// => [2, 3]
+		 
+		_.drop([1, 2, 3], 2);
+		// => [3]
+		 
+		_.drop([1, 2, 3], 5);
+		// => []
+		 
+		_.drop([1, 2, 3], 0);
+		// => [1, 2, 3]
+
+		_.dropRight([1, 2, 3]);
+		// => [1, 2]
+		 
+		_.dropRight([1, 2, 3], 2);
+		// => [1]
+		 
+		_.dropRight([1, 2, 3], 5);
+		// => []
+		 
+		_.dropRight([1, 2, 3], 0);
+		// => [1, 2, 3]
+
+		var users = [
+		  { 'user': 'barney',  'active': true },
+		  { 'user': 'fred',    'active': false },
+		  { 'user': 'pebbles', 'active': false }
+		];
+		 
+		_.dropRightWhile(users, function(o) { return !o.active; });
+		// => objects for ['barney']
+		 
+		// The `_.matches` iteratee shorthand.
+		_.dropRightWhile(users, { 'user': 'pebbles', 'active': false });
+		// => objects for ['barney', 'fred']
+		 
+		// The `_.matchesProperty` iteratee shorthand.
+		_.dropRightWhile(users, ['active', false]);
+		// => objects for ['barney']
+		 
+		// The `_.property` iteratee shorthand.
+		_.dropRightWhile(users, 'active');
+		// => objects for ['barney', 'fred', 'pebbles']
+
+
+		_.dropWhile(users, function(o) { return !o.active; });
+		// => objects for ['pebbles']
+		 
+		// The `_.matches` iteratee shorthand.
+		_.dropWhile(users, { 'user': 'barney', 'active': false });
+		// => objects for ['fred', 'pebbles']
+		 
+		// The `_.matchesProperty` iteratee shorthand.
+		_.dropWhile(users, ['active', false]);
+		// => objects for ['pebbles']
+		 
+		// The `_.property` iteratee shorthand.
+		_.dropWhile(users, 'active');
+		// => objects for ['barney', 'fred', 'pebbles']
+
+		_.findIndex(users, function(o) { return o.user == 'barney'; });
+		// => 0
+		 
+		// The `_.matches` iteratee shorthand.
+		_.findIndex(users, { 'user': 'fred', 'active': false });
+		// => 1
+		 
+		// The `_.matchesProperty` iteratee shorthand.
+		_.findIndex(users, ['active', false]);
+		// => 0
+		 
+		// The `_.property` iteratee shorthand.
+		_.findIndex(users, 'active');
+		// => 2
+		_.findLastIndex(users, function(o) { return o.user == 'pebbles'; });
+		// => 2
+		 
+		// The `_.matches` iteratee shorthand.
+		_.findLastIndex(users, { 'user': 'barney', 'active': true });
+		// => 0
+		 
+		// The `_.matchesProperty` iteratee shorthand.
+		_.findLastIndex(users, ['active', false]);
+		// => 2
+		 
+		// The `_.property` iteratee shorthand.
+		_.findLastIndex(users, 'active');
+		// => 0
+
+
+		var array = [1, 2, 3];
+ 
+		_.fill(array, 'a');
+		// => ['a', 'a', 'a']
+		 
+		_.fill(Array(3), 2);
+		// => [2, 2, 2]
+		_.fill(Array(2),2)
+		// => [2,2]
+		 
+		_.fill([4, 6, 8, 10], '*', 1, 3);
+		// => [4, '*', '*', 10]
+
+
+		_.flatten([1, [2, [3, [4]], 5]]);
+		// => [1, 2, [3, [4]], 5]
+		_.flattenDeep([1, [2, [3, [4]], 5]]);
+		// => [1, 2, 3, 4, 5]
+
+
+		var array = [1, [2, [3, [4]], 5]];
+ 
+		_.flattenDepth(array, 1);
+		// => [1, 2, [3, [4]], 5]
+		 
+		_.flattenDepth(array, 2);
+		// => [1, 2, 3, [4], 5]
+
+		//这个方法返回一个由键值对组成的对象。
+		_.fromPairs([['a', 1], ['b', 2]]);
+		// => { 'a': 1, 'b': 2 }
+
+
+		_.head([1, 2, 3]);
+		// => 1
+		 
+		_.head([]);
+		// => undefined
+
+
+		_.indexOf([1, 2, 1, 2], 2);
+		// => 1
+		 
+		// Search from the `fromIndex`.
+		_.indexOf([1, 2, 1, 2], 2, 2);
+		// => 3
+
+		_.initial([1, 2, 3]); //Gets all but the last element of array.
+		// => [1, 2]
+
+		_.intersection([2, 1], [2, 3]); // 获得交叉元素
+		// => [2]
+
+		_.intersectionBy([2.1, 1.2], [2.3, 3.4], Math.floor);
+		// => [2.1]
+		 
+		// The `_.property` iteratee shorthand.
+		_.intersectionBy([{ 'x': 1 }], [{ 'x': 2 }, { 'x': 1 }], 'x');
+		// => [{ 'x': 1 }]
+
+
+		var objects = [{ 'x': 1, 'y': 2 }, { 'x': 2, 'y': 1 }];
+		var others = [{ 'x': 1, 'y': 1 }, { 'x': 1, 'y': 2 }];
+		 
+		_.intersectionWith(objects, others, _.isEqual);
+		// => [{ 'x': 1, 'y': 2 }]
+
+		_.join(['a', 'b', 'c'], '~');
+		// => 'a~b~c'
+
+		_.last([1, 2, 3]);
+		// => 3
+
+		_.lastIndexOf([1, 2, 1, 2], 2);
+		// => 3
+		 
+		// Search from the `fromIndex`.
+		_.lastIndexOf([1, 2, 1, 2], 2, 2);
+		// => 1
+
+		var array = ['a', 'b', 'c', 'd'];
+ 
+		_.nth(array, 1);
+		// => 'b'
+		 
+		_.nth(array, -2);
+		// => 'c';
+
+
+		var array = ['a', 'b', 'c', 'a', 'b', 'c'];
+		_.pull(array, 'a', 'c'); //移除数组array中所有和给定值相等的元素
+		// => ['b', 'b']
+
+		var array = [1, 2, 3, 1, 2, 3];
+		_.pullAll(array, [2, 3]);
+		// => [1, 1]
+
+
+
+		var array = [{ 'x': 1 }, { 'x': 2 }, { 'x': 3 }, { 'x': 1 }];
+ 
+		_.pullAllBy(array, [{ 'x': 1 }, { 'x': 3 }], 'x');
+		console.log(array);
+		// => [{ 'x': 2 }]
+
+
+		var array = [{ 'x': 1, 'y': 2 }, { 'x': 3, 'y': 4 }, { 'x': 5, 'y': 6 }];
+ 
+		_.pullAllWith(array, [{ 'x': 3, 'y': 4 }], _.isEqual);
+		console.log(array);
+		// => [{ 'x': 1, 'y': 2 }, { 'x': 5, 'y': 6 }]
+
+
+		var array = ['a', 'b', 'c', 'd'];
+		var pulled = _.pullAt(array, [1, 3]);
+		 
+		console.log(array);
+		// => ['a', 'c']
+		 
+		console.log(pulled);
+		// => ['b', 'd']
+
+
+		var array = [1, 2, 3, 4];
+		var evens = _.remove(array, function(n) {
+		  return n % 2 == 0;
+		});
+		 
+		console.log(array);
+		// => [1, 3]
+		 
+		console.log(evens);
+		// => [2, 4]
+
+
+		var array = [1, 2, 3];
+ 
+		_.reverse(array);
+		// => [3, 2, 1]
+		 
+		console.log(array);
+		// => [3, 2, 1]
+
+
+		_.sortedIndex([30, 50], 40);// => 1
+
+
+		var objects = [{ 'x': 4 }, { 'x': 5 }];
+ 
+		_.sortedIndexBy(objects, { 'x': 4 }, function(o) { return o.x; });
+		// => 0
+		 
+		// The `_.property` iteratee shorthand.
+		_.sortedIndexBy(objects, { 'x': 4 }, 'x');
+		// => 0
+
+		_.sortedIndexOf([4, 5, 5, 5, 6], 5);
+		// => 1
+
+		_.sortedLastIndex([4, 5, 5, 5, 6], 5);
+		// => 4
+
+
+		var objects = [{ 'x': 4 }, { 'x': 5 }];
+ 
+		_.sortedLastIndexBy(objects, { 'x': 4 }, function(o) { return o.x; });
+		// => 1
+		 
+		// The `_.property` iteratee shorthand.
+		_.sortedLastIndexBy(objects, { 'x': 4 }, 'x');
+		// => 1
+
+		_.sortedLastIndexOf([4, 5, 5, 5, 6], 5);
+		// => 3
+
+
+		_.sortedUniq([1, 1, 2]);
+		// => [1, 2]
+
+		_.sortedUniqBy([1.1, 1.2, 2.3, 2.4], Math.floor);
+		// => [1.1, 2.3]
+
+		_.tail([1, 2, 3]);
+		// => [2, 3]
+
+		_.take([1, 2, 3]);
+		// => [1]
+		 
+		_.take([1, 2, 3], 2);
+		// => [1, 2]
+		 
+		_.take([1, 2, 3], 5);
+		// => [1, 2, 3]
+		 
+		_.take([1, 2, 3], 0);
+		// => []
+
+		_.takeRight([1, 2, 3]);
+		// => [3]
+		 
+		_.takeRight([1, 2, 3], 2);
+		// => [2, 3]
+		 
+		_.takeRight([1, 2, 3], 5);
+		// => [1, 2, 3]
+		 
+		_.takeRight([1, 2, 3], 0);
+		// => []
+
+
+
+		var users = [
+		  { 'user': 'barney',  'active': true },
+		  { 'user': 'fred',    'active': false },
+		  { 'user': 'pebbles', 'active': false }
+		];
+		 
+		_.takeRightWhile(users, function(o) { return !o.active; });
+		// => objects for ['fred', 'pebbles']
+		 
+		// The `_.matches` iteratee shorthand.
+		_.takeRightWhile(users, { 'user': 'pebbles', 'active': false });
+		// => objects for ['pebbles']
+		 
+		// The `_.matchesProperty` iteratee shorthand.
+		_.takeRightWhile(users, ['active', false]);
+		// => objects for ['fred', 'pebbles']
+		 
+		// The `_.property` iteratee shorthand.
+		_.takeRightWhile(users, 'active');
+		// => []
+
+		_.takeWhile(users, function(o) { return !o.active; });
+		// => objects for ['barney', 'fred']
+		 
+		// The `_.matches` iteratee shorthand.
+		_.takeWhile(users, { 'user': 'barney', 'active': false });
+		// => objects for ['barney']
+		 
+		// The `_.matchesProperty` iteratee shorthand.
+		_.takeWhile(users, ['active', false]);
+		// => objects for ['barney', 'fred']
+		 
+		// The `_.property` iteratee shorthand.
+		_.takeWhile(users, 'active');
+		// => []
+
+		_.union([2], [1, 2]);
+		// => [2, 1]
+
+		_.unionBy([2.1], [1.2, 2.3], Math.floor);
+		// => [2.1, 1.2]
+		 
+		// The `_.property` iteratee shorthand.
+		_.unionBy([{ 'x': 1 }], [{ 'x': 2 }, { 'x': 1 }], 'x');
+		// => [{ 'x': 1 }, { 'x': 2 }]
+
+
+		var objects = [{ 'x': 1, 'y': 2 }, { 'x': 2, 'y': 1 }];
+		var others = [{ 'x': 1, 'y': 1 }, { 'x': 1, 'y': 2 }];
+		 
+		_.unionWith(objects, others, _.isEqual);
+		// => [{ 'x': 1, 'y': 2 }, { 'x': 2, 'y': 1 }, { 'x': 1, 'y': 1 }]
+
+		_.uniq([2, 1, 2]);
+		// => [2, 1]
+
+		_.uniqBy([2.1, 1.2, 2.3], Math.floor);
+		// => [2.1, 1.2]
+		 
+		// The `_.property` iteratee shorthand.
+		_.uniqBy([{ 'x': 1 }, { 'x': 2 }, { 'x': 1 }], 'x');
+		// => [{ 'x': 1 }, { 'x': 2 }]
+
+
+		var objects = [{ 'x': 1, 'y': 2 }, { 'x': 2, 'y': 1 }, { 'x': 1, 'y': 2 }];
+		_.uniqWith(objects, _.isEqual);
+		// => [{ 'x': 1, 'y': 2 }, { 'x': 2, 'y': 1 }]
+
+
+		var zipped = _.zip(['a', 'b'], [1, 2], [true, false]);
+		// => [['a', 1, true], ['b', 2, false]]
+		 
+		_.unzip(zipped);
+		// => [['a', 'b'], [1, 2], [true, false]]
+
+
+		var zipped = _.zip([1, 2], [10, 20], [100, 200]);
+		// => [[1, 10, 100], [2, 20, 200]]
+		 
+		_.unzipWith(zipped, _.add);
+		// => [3, 30, 300]
+
+		_.without([2, 1, 2, 3], 1, 2);
+		// => [3]
+
+
+
+		_.xorBy([2.1, 1.2], [2.3, 3.4], Math.floor);
+		// => [1.2, 3.4]
+		 
+		// The `_.property` iteratee shorthand.
+		_.xorBy([{ 'x': 1 }], [{ 'x': 2 }, { 'x': 1 }], 'x');
+		// => [{ 'x': 2 }]
+
+
+		var objects = [{ 'x': 1, 'y': 2 }, { 'x': 2, 'y': 1 }];
+		var others = [{ 'x': 1, 'y': 1 }, { 'x': 1, 'y': 2 }];
+		 
+		_.xorWith(objects, others, _.isEqual);
+		// => [{ 'x': 2, 'y': 1 }, { 'x': 1, 'y': 1 }]
+
+		_.zip(['a', 'b'], [1, 2], [true, false]);
+		// => [['a', 1, true], ['b', 2, false]]
+
+		_.zipObject(['a', 'b'], [1, 2]);
+		// => { 'a': 1, 'b': 2 }
+
+		_.zipObjectDeep(['a.b[0].c', 'a.b[1].d'], [1, 2]);
+		// => { 'a': { 'b': [{ 'c': 1 }, { 'd': 2 }] } }
+
+		_.zipWith([1, 2], [10, 20], [100, 200], function(a, b, c) {
+		  return a + b + c;
+		});
+		// => [111, 222]
+	</script>
+</body>
+</html>
